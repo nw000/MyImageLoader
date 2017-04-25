@@ -1,10 +1,12 @@
 package com.example.nw.imageloader;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
@@ -16,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         imageView = (ImageView) findViewById(R.id.iv);
-        imageView.setImageBitmap(decodeSampleBitmapFromResourse(getResources(),R.drawable.hotographer,50,50));
+        imageView.setImageBitmap(decodeSampleBitmapFromResourse(getResources(), R.drawable.hotographer, 50, 50));
     }
 
     public Bitmap decodeSampleBitmapFromResourse(Resources res, int resId, int reqWidth, int reqHeight) {
@@ -39,5 +41,9 @@ public class MainActivity extends AppCompatActivity {
             inSampleSize = widthRound > heightRound ? heightRound : widthRound;
         }
         return inSampleSize;
+    }
+
+    public void grid(View view) {
+        startActivity(new Intent(this, GridActivity.class));
     }
 }
