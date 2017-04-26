@@ -111,17 +111,24 @@ public class GridActivity extends AppCompatActivity {
             "https://lh4.googleusercontent.com/-PDT167_xRdA/URqvK36mLcI/AAAAAAAAAbs/oi2ik9QseMI/s160-c/Windmills.jpg",
             "https://lh5.googleusercontent.com/-kI_QdYx7VlU/URqvLXCB6gI/AAAAAAAAAbs/N31vlZ6u89o/s160-c/Yet%252520Another%252520Rockaway%252520Sunset.jpg",
             "https://lh4.googleusercontent.com/-e9NHZ5k5MSs/URqvMIBZjtI/AAAAAAAAAbs/1fV810rDNfQ/s160-c/Yosemite%252520Tree.jpg",};
+    private GridView photo_wall;
+    private PhotoWallAdapter photoWallAdapter;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grid);
-        GridView photo_wall = (GridView) findViewById(R.id.phote_wall);
-//        photo_wall.setAdapter();
+        photo_wall = (GridView) findViewById(R.id.phote_wall);
+        photoWallAdapter = new PhotoWallAdapter(getBaseContext(), R.layout.photo_layout, imageThumbUrls, photo_wall);
+        photo_wall.setAdapter(photoWallAdapter);
 
 
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        photoWallAdapter.cancelAllTasks();
+    }
 }

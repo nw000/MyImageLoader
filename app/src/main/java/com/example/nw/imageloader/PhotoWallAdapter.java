@@ -67,6 +67,7 @@ public class PhotoWallAdapter extends ArrayAdapter<String> implements AbsListVie
         gridView.setOnScrollListener(this);
     }
 
+
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -111,7 +112,12 @@ public class PhotoWallAdapter extends ArrayAdapter<String> implements AbsListVie
         }
     }
 
-    private void cancelAllTasks() {
+    public void cancelAllTasks() {
+        if (set != null) {
+            for (BitmapTask bitmap : set) {
+                bitmap.cancel(true);
+            }
+        }
 
     }
 
@@ -136,7 +142,7 @@ public class PhotoWallAdapter extends ArrayAdapter<String> implements AbsListVie
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
         mFirstVisibleItem = firstVisibleItem;
         mVisibleItemCount = visibleItemCount;
-        if (isFirstEnter && visibleItemCount > 0) {
+        if (isFirstEnter && visibleItemCount != 0) {
             loadBitmaps(firstVisibleItem, visibleItemCount);
             isFirstEnter = false;
         }
